@@ -1,28 +1,37 @@
+import "./CurrentWeather.css";
+
 function CurrentWeather({ city, weather }) {
+    const now = new Date();
+
+    // 和風日付
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const weekday = weekdays[now.getDay()];
+    const dateString = `${month}月${day}日（${weekday}）`;
+
+    // 時刻
+    const timeString = now.toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+
     return (
-        <div
-            style={{
-                padding: "20px",
-                borderRadius: "10px",
-                background: "#f5f5f5",
-                marginBottom: "20px",
-            }}
-        >
-            <h2>{city} の現在の天気</h2>
+        <div className="weather-card">
+            <h2>{city}</h2>
 
-            {/* 天気アイコン */}
-            <img
-                src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                alt=""
-            />
-
-            {/* 気温 */}
-            <p style={{ fontSize: "32px", margin: "10px 0" }}>
-                {weather.temp}°C
+            {/* 日付 + 時刻 */}
+            <p className="datetime">
+                現在：{dateString} {timeString}
             </p>
 
-            {/* 説明 */}
-            <p>{weather.description}</p>
+            <img
+                src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                alt="weather icon"
+            />
+
+            <p className="temp">{Math.round(weather.temp)}°C</p>
+            <p className="desc">{weather.description}</p>
         </div>
     );
 }

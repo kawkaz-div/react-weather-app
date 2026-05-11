@@ -1,10 +1,10 @@
-// App.jsx
 import { useEffect, useState } from "react";
+import "./App.css";
+
 import CurrentWeather from "./components/CurrentWeather";
 import ForecastList from "./components/ForecastList";
 import SearchBar from "./components/SearchBar";
 
-// .env の環境変数を読み込む
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 // 現在の天気を取得する関数
@@ -73,7 +73,7 @@ function App() {
   }, [city]);
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
+    <div className="app-container">
       <SearchBar onSearch={setCity} />
 
       {/* エラーメッセージ */}
